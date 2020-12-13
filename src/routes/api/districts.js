@@ -7,4 +7,9 @@ router.get('districts-forecasts', '/forecasts', async (ctx) => {
   ctx.body = districts;
 });
 
+router.get('districts-influxes', '/influxes', async (ctx) => {
+  const districts = await ctx.orm.District.findAll({ include: 'PeopleInfluxes' });
+  ctx.body = districts;
+});
+
 module.exports = router;
