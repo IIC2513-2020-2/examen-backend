@@ -1,5 +1,6 @@
 const KoaRouter = require('koa-router');
 const auth = require('./auth');
+const districts = require('./districts');
 
 const router = new KoaRouter();
 
@@ -17,5 +18,6 @@ router.get('/', async (ctx) => {
 });
 
 router.use('/auth', auth.routes());
+router.use('/districts', districts.routes());
 
 module.exports = router;
