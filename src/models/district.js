@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.WeatherForecast, { foreignKey: 'districtId' });
       this.hasMany(models.PeopleInflux, { foreignKey: 'districtId' });
+      this.hasOne(models.EclipseInfo, { foreignKey: 'districtId' });
     }
   }
   District.init({
