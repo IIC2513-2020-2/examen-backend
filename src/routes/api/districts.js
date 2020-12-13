@@ -12,4 +12,9 @@ router.get('districts-influxes', '/influxes', async (ctx) => {
   ctx.body = districts;
 });
 
+router.get('districts-eclipse-info', '/eclipse-info', async (ctx) => {
+  const districts = await ctx.orm.District.findAll({ include: 'EclipseInfo' });
+  ctx.body = districts;
+});
+
 module.exports = router;
