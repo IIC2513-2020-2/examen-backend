@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface) => {
     const districtsArray = [
@@ -106,5 +104,5 @@ module.exports = {
 
   down: async (queryInterface) => {
     await queryInterface.bulkDelete('Districts', null, {});
-  }
+  },
 };
