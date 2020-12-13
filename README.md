@@ -1,15 +1,10 @@
-# Ensayo examen backend
+# Examen backend
 
-Este proyecto fue construido con el template del curso (ya visto por ustedes en el proyecto) y expone una API REST de prueba.
+Este proyecto fue construido con el template del curso (ya visto por ustedes en el proyecto) y expone una API REST con información sobre las comunas de Chile que se encuentran en la zona de totalidad del eclipse solar del 2020.
 
 ## Pre-requisitos para correr proyecto:
 * PostgreSQL
   * Crear una base de datos en PostgreSQL con un nombre (ejemplo, `examen_dev`) y asignarle un user/password válido
-  * Configurar base de datos con nombre y user/password dentro de `src/config/database.js`. Se pueden usar variables de ambiente o modificar directamente el archivo (si les parece más simple)
-  * En caso de utilizar variables de ambiente, especificar tres:
-    * `DB_NAME`
-    * `DB_USERNAME`
-    * `DB_PASSWORD`
 * Node.js LTS (ojalá 12.x, pero también puede ser 10.x)
 * [Yarn](https://yarnpkg.com)
 
@@ -21,8 +16,16 @@ Este proyecto fue construido con el template del curso (ya visto por ustedes en 
   * `nvm use`
 * Instalar dependencias:
   * `yarn install`
+* Configurar base de datos con nombre y user/password dentro de `src/config/database.js`. Se pueden usar variables de ambiente o modificar directamente el archivo (si les parece más simple)
+  * En caso de utilizar variables de ambiente, especificar tres:
+    * `DB_NAME`
+    * `DB_USERNAME`
+    * `DB_PASSWORD`
+* Agregar variable de ambiente `JWT_SECRET` con algún valor arbitrario
 * Correr migraciones
   * `yarn sequelize db:migrate`
+* Correr seeds
+  * `yarn sequelize db:seed:all`
 
 ## Ejecutar aplicación
 
@@ -41,5 +44,8 @@ Para verificar que todo está bien:
     "usersCount": 0
   }
   ```
+- Además puedes probar los endpoints especificados en el enunciado del examen
 
-¡Listo! Ya estás de condiciones de correr una API con el template del curso. En el examen tendrás que seguir pasos similares, pero con otro repositorio.
+¡Listo! Ya estás de condiciones de ejecutar y modificar la API del examen.
+
+¡Éxito!
