@@ -11,16 +11,15 @@ Este proyecto fue construido con el template del curso (ya visto por ustedes en 
 ## Setup proyecto
 
 * Clonar repositorio
-* `cd examen-backend-rehearsal`
+* `cd examen-backend`
 * (Opcional) Si usan `nvm`, cambiar a versión válida para el proyecto
   * `nvm use`
 * Instalar dependencias:
   * `yarn install`
-* Configurar base de datos con nombre y user/password dentro de `src/config/database.js`. Se pueden usar variables de ambiente o modificar directamente el archivo (si les parece más simple)
-  * En caso de utilizar variables de ambiente, especificar tres:
-    * `DB_NAME`
-    * `DB_USERNAME`
-    * `DB_PASSWORD`
+* Configurar base de datos con nombre y user/password dentro de `src/config/database.js`. Debes especificar tres variables de ambiente:
+  * `DB_NAME`
+  * `DB_USERNAME`
+  * `DB_PASSWORD`
 * Agregar variable de ambiente `JWT_SECRET` con algún valor arbitrario
 * Correr migraciones
   * `yarn sequelize db:migrate`
