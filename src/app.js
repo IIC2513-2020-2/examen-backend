@@ -60,6 +60,8 @@ app.use(session({
   maxAge: 14 * 24 * 60 * 60 * 1000, // 2 weeks
 }, app));
 
+app.use(koaCors());
+
 // flash messages support
 app.use(koaFlashMessage);
 
