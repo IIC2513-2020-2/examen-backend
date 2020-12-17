@@ -28,7 +28,12 @@ router.get('districts-forecasts', '/forecasts', async (ctx) => {
 });
 
 router.get('districts-influxes', '/influxes', async (ctx) => {
-  const districts = await ctx.orm.District.findAll({ include: 'PeopleInfluxes' });
+  const districts = await ctx.orm.District.findAll({
+    include: 'PeopleInfluxes',
+    order: [
+      ['PeopleInfluxes', 'date', 'DESC'],
+    ],
+  });
   ctx.body = districts;
 });
 
@@ -39,12 +44,15 @@ router.get('districts-eclipse-info', '/eclipse-info', async (ctx) => {
 
 router.post('districts-forecasts-create', '/:id/forecasts', async (ctx) => {
   const { district } = ctx.state;
-  const weatherForecast = ctx.orm.WeatherForecast.build({ ...ctx.request.body, districtId: district.id });
-  try{
+  const weatherForecast = ctx.orm.WeatherForecast.build({
+    ...ctx.request.body,
+    districtId: district.id,
+  });
+  try {
     await weatherForecast.save({ fields: PERMITTED_WEATHER_FORECAST_FIELDS });
     ctx.status = 201;
     ctx.body = weatherForecast;
-  } catch(error) {
+  } catch (error) {
     ctx.throw(422);
   }
 });
