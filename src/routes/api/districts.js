@@ -10,6 +10,12 @@ const PERMITTED_WEATHER_FORECAST_FIELDS = [
   'districtId',
 ];
 
+const PERMITTED_PEOPLE_INFLUX_FIELDS = [
+  'quantity',
+  'date',
+  'districtId',
+];
+
 router.param('id', async (id, ctx, next) => {
   const district = await ctx.orm.District.findByPk(id);
   if (!district) ctx.throw(404);
@@ -56,4 +62,20 @@ router.post('districts-forecasts-create', '/:id/forecasts', async (ctx) => {
     ctx.throw(422);
   }
 });
+
+router.post('districts-influxes-create', '/:id/influxes', async (ctx) => {
+  const { district } = ctx.state;
+  const peopleInflux = ctx.orm.PeopleInflux.build({
+    ...ctx.request.body,
+    districtId: district.id,
+  });
+  try {
+    await peopleInflux.save({ fields: PERMITTED_PEOPLE_INFLUX_FIELDS });
+    ctx.status = 201;
+    ctx.body = peopleInflux;
+  } catch (error) {
+    ctx.throw(422);
+  }
+});
+
 module.exports = router;

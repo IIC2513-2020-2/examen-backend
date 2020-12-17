@@ -15,9 +15,28 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PeopleInflux.init({
-    quantity: DataTypes.INTEGER,
-    date: DataTypes.DATE,
-    districtId: DataTypes.INTEGER,
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        min: 1,
+      },
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    districtId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
   }, {
     sequelize,
     modelName: 'PeopleInflux',
