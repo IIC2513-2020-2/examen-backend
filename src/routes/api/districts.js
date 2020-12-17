@@ -3,7 +3,12 @@ const KoaRouter = require('koa-router');
 const router = new KoaRouter();
 
 router.get('districts-forecasts', '/forecasts', async (ctx) => {
-  const districts = await ctx.orm.District.findAll({ include: 'WeatherForecasts' });
+  const districts = await ctx.orm.District.findAll({
+    include: 'WeatherForecasts',
+    order: [
+      ['WeatherForecasts', 'date', 'DESC'],
+    ],
+  });
   ctx.body = districts;
 });
 

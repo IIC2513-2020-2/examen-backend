@@ -1,4 +1,5 @@
 const KoaRouter = require('koa-router');
+const jwt = require('koa-jwt');
 const auth = require('./auth');
 const districts = require('./districts');
 
@@ -18,6 +19,9 @@ router.get('/', async (ctx) => {
 });
 
 router.use('/auth', auth.routes());
+
+router.use(jwt({ secret: process.env.JWT_SECRET, key: 'jwtDecoded' }));
+
 router.use('/districts', districts.routes());
 
 module.exports = router;
