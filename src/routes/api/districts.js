@@ -2,6 +2,21 @@ const KoaRouter = require('koa-router');
 
 const router = new KoaRouter();
 
+const PERMITTED_WEATHER_FORECAST_FIELDS = [
+  'forecast',
+  'date',
+  'min',
+  'max',
+  'districtId',
+];
+
+router.param('id', async (id, ctx, next) => {
+  const district = await ctx.orm.District.findByPk(id);
+  if (!district) ctx.throw(404);
+  ctx.state.district = district;
+  return next();
+});
+
 router.get('districts-forecasts', '/forecasts', async (ctx) => {
   const districts = await ctx.orm.District.findAll({
     include: 'WeatherForecasts',
@@ -22,4 +37,15 @@ router.get('districts-eclipse-info', '/eclipse-info', async (ctx) => {
   ctx.body = districts;
 });
 
+router.post('districts-forecasts-create', '/:id/forecasts', async (ctx) => {
+  const { district } = ctx.state;
+  const weatherForecast = ctx.orm.WeatherForecast.build({ ...ctx.request.body, districtId: district.id });
+  try{
+    await weatherForecast.save({ fields: PERMITTED_WEATHER_FORECAST_FIELDS });
+    ctx.status = 201;
+    ctx.body = weatherForecast;
+  } catch(error) {
+    ctx.throw(422);
+  }
+});
 module.exports = router;

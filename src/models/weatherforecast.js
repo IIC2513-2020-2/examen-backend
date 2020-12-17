@@ -15,11 +15,41 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WeatherForecast.init({
-    forecast: DataTypes.STRING,
-    date: DataTypes.DATE,
-    min: DataTypes.INTEGER,
-    max: DataTypes.INTEGER,
-    districtId: DataTypes.INTEGER,
+    forecast: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    min: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    max: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    districtId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
   }, {
     sequelize,
     modelName: 'WeatherForecast',
